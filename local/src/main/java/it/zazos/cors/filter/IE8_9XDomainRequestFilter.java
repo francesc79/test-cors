@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * Created by zanutto on 3/11/15.
  */
-public class IE8XDomainRequestFilter implements Filter {
+public class IE8_9XDomainRequestFilter implements Filter {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
