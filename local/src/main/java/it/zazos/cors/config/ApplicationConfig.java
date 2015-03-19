@@ -21,7 +21,6 @@ import java.util.Map;
 public class ApplicationConfig {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public FilterRegistrationBean createIE8_9XDomainRequestFilter() {
