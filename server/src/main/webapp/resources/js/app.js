@@ -5,32 +5,77 @@ $(document).ready(function () {
 
     function make_base_auth(user, password) {
         var tok = user + ':' + password;
-        var hash = btoa(tok);
+        var hash = '';
+        if (window.btoa) {
+            hash = window.btoa(tok);
+        } else { //for <= IE9
+            hash = $.base64.encode(tok);
+        }
         return 'Basic ' + hash;
     }
 
-    $('#printers').on('click', function (e) {
-        e.preventDefault();
+    function crossDomainCall (url, type, user, password, contentType, data, callback) {
+
+        var auth = make_base_auth(user, password);
+        if ($('#ltIE9').length > 0) {
+            if (type === 'GET') {
+                url += (url.indexOf('?') > -1) ? '&' : '?';
+                url += 'Authorization=' + encodeURIComponent(auth);
+            }
+            else {
+                url += (url.indexOf('?') > -1) ? '&' : '?';
+                url += 'Content-Type=' + encodeURIComponent(contentType);
+
+                if (contentType === 'application/x-www-form-urlencoded') {
+                    data = 'Authorization=' + encodeURIComponent(auth) +
+                    (data ? '&' + data : '');
+                }
+                else {
+                    throw Error('contentType unknown');
+                }
+            }
+        }
 
         $.ajax({
-            url: 'http://localhost:8080/rest/printers',
-            type: 'GET',
+            url: url,
+            type: type,
+            data: data,
             dataType: 'json',
+            contentType: contentType + '; charset=UTF-8',
             async: true,
             cache: false,
             crossDomain: true,
             beforeSend: function (xhr, opts) {
-                var auth = make_base_auth(user, password);
-                console.log('auth:' + auth);
                 xhr.setRequestHeader('Authorization', auth);
+                return true;
             },
             success: function (resp) {
-                $('#result').text(resp);
+                if (callback) {
+                    callback(resp);
+                }
             },
             error: function(xhr) {
                 alert('Error!  Status = ' + xhr.status + " Message = " + xhr.statusText);
             }
         });
+
+    }
+
+    $('#get-printers').on('click', function (e) {
+        e.preventDefault();
+        $('#result').text('');
+        crossDomainCall ('http://127.0.0.1:8080/rest/printers', 'GET', user, password,
+            null, null, function (resp) {
+            $('#result').text(resp);
+        });
     });
 
+    $('#post-printers').on('click', function (e) {
+        e.preventDefault();
+        $('#result').text('');
+        crossDomainCall ('http://127.0.0.1:8080/rest/printers', 'POST', user, password,
+            'application/x-www-form-urlencoded', 'param=12', function (resp) {
+            $('#result').text(resp);
+        });
+    });
 });

@@ -5,12 +5,22 @@
     </head>
     <body>
         <h1>Test CORS</h1>
-        <input id="printers" type="button" value="Get Printers" />
+        <input id="get-printers" type="button" value="GET Printers" />
+        <input id="post-printers" type="button" value="POST Printers" />
 
         <h2>Result:</h2>
         <div id="result"></div>
 
-        <script src="resources/js/vendor/jquery/jquery-2.1.1.min.js"></script>
+        <!--[if lt IE 9]>
+        <script src="resources/vendor/jquery-legacy/dist/jquery.min.js"></script>
+        <script src="resources/vendor/jquery.base64/jquery.base64.js"></script>
+        <script src="resources/vendor/jquery-ajaxtransport-xdomainrequest/jquery.xdomainrequest.min.js"></script>
+        <input id="ltIE9" type="hidden" />
+        <![endif]-->
+        <!--[if gte IE 9]><!-->
+        <script src="resources/vendor/jquery-modern/dist/jquery.min.js"></script>
+        <!--<![endif]-->
+
         <script src="resources/js/app.js"></script>
     </body>
 </html>

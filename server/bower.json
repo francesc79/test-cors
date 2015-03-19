@@ -1,0 +1,14 @@
+{
+  "name": "test-cors-server",
+  "version": "1.0.0",
+  "authors": [
+    "Francesco Zanutto"
+  ],
+  "description": "JavaScript dependencies",
+  "private": true,
+  "dependencies": {
+    "jquery-legacy": "jquery#~1.11.2",
+    "jquery-modern": "jquery#~2.1.3",
+    "jquery-ajaxtransport-xdomainrequest": "~1.0.4"
+  }
+}
