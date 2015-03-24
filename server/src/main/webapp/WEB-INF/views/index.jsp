@@ -7,6 +7,7 @@
         <h1>Test CORS</h1>
         <input id="get-printers" type="button" value="GET Printers" />
         <input id="post-printers" type="button" value="POST Printers" />
+        <input id="post-json-printers" type="button" value="POST JSON Printers" />
 
         <h2>Result:</h2>
         <div id="result"></div>

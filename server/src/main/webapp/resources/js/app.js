@@ -18,21 +18,14 @@ $(document).ready(function () {
 
         var auth = make_base_auth(user, password);
         if ($('#ltIE9').length > 0) {
-            if (type === 'GET') {
-                url += (url.indexOf('?') > -1) ? '&' : '?';
-                url += 'Authorization=' + encodeURIComponent(auth);
-            }
-            else {
+            url += (url.indexOf('?') > -1) ? '&' : '?';
+            url += 'Authorization=' + encodeURIComponent(auth);
+            if (type === 'POST') {
                 url += (url.indexOf('?') > -1) ? '&' : '?';
                 url += 'Content-Type=' + encodeURIComponent(contentType);
-
-                if (contentType === 'application/x-www-form-urlencoded') {
-                    data = 'Authorization=' + encodeURIComponent(auth) +
-                    (data ? '&' + data : '');
-                }
-                else {
-                    throw Error('contentType unknown');
-                }
+            }
+            else if (type !== 'GET') {
+                throw Error('type ' + type + ' not supported');
             }
         }
 
@@ -77,5 +70,14 @@ $(document).ready(function () {
             'application/x-www-form-urlencoded', 'param=12', function (resp) {
             $('#result').text(resp);
         });
+    });
+
+    $('#post-json-printers').on('click', function (e) {
+        e.preventDefault();
+        $('#result').text('');
+        crossDomainCall ('http://127.0.0.1:8080/rest/printers', 'POST', user, password,
+            'application/json', {param:123}, function (resp) {
+                $('#result').text(resp);
+            });
     });
 });
