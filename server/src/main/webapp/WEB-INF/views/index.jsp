@@ -15,7 +15,7 @@
         <!--[if lt IE 9]>
         <script src="resources/vendor/jquery-legacy/dist/jquery.min.js"></script>
         <script src="resources/vendor/jquery.base64/jquery.base64.js"></script>
-        <script src="resources/vendor/jquery-ajaxtransport-xdomainrequest/jquery.xdomainrequest.min.js"></script>
+        <script src="resources/vendor/jquery-ajaxtransport-xdomainrequest/jQuery.XDomainRequest.js"></script>
         <input id="ltIE9" type="hidden" />
         <![endif]-->
         <!--[if gte IE 9]><!-->

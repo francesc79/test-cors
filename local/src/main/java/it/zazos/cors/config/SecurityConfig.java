@@ -36,5 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .anyRequest().hasRole("USER");
+        http.headers()
+                .disable();
     }
 }

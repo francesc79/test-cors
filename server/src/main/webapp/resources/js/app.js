@@ -57,7 +57,7 @@ $(document).ready(function () {
     $('#get-printers').on('click', function (e) {
         e.preventDefault();
         $('#result').text('');
-        crossDomainCall ('http://127.0.0.1:8080/rest/printers', 'GET', user, password,
+        crossDomainCall (location.protocol + '//127.0.0.1:' + (location.protocol==='https:'?8090:8080) + '/rest/printers', 'GET', user, password,
             null, null, function (resp) {
             $('#result').text(resp);
         });
@@ -66,7 +66,7 @@ $(document).ready(function () {
     $('#post-printers').on('click', function (e) {
         e.preventDefault();
         $('#result').text('');
-        crossDomainCall ('http://127.0.0.1:8080/rest/printers', 'POST', user, password,
+        crossDomainCall (location.protocol + '//127.0.0.1:' + (location.protocol==='https:'?8090:8080) + '/rest/printers', 'POST', user, password,
             'application/x-www-form-urlencoded', 'param=12', function (resp) {
             $('#result').text(resp);
         });
@@ -75,7 +75,7 @@ $(document).ready(function () {
     $('#post-json-printers').on('click', function (e) {
         e.preventDefault();
         $('#result').text('');
-        crossDomainCall ('http://127.0.0.1:8080/rest/printers', 'POST', user, password,
+        crossDomainCall (location.protocol + '//127.0.0.1:' + (location.protocol==='https:'?8090:8080) + '/rest/printers', 'POST', user, password,
             'application/json', {param:123}, function (resp) {
                 $('#result').text(resp);
             });
